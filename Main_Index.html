@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Main</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Google Fonts: Lato for the new background styling -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,700,300italic" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="Main_styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Dashboard Title -->
+    <h1 class="dashboard-title">Quick Buttons</h1>
+    
+    <!-- CoreAuth Card -->
+    <div class="card">
+      <div class="card-header bg-danger text-white">CoreCard</div>
+      <div class="card-body">
+        <!-- Inner Box 1 -->
+        <div class="inner-box">
+          <div class="inner-box-header">Caller</div>
+          <div class="d-flex flex-row flex-wrap justify-content-center">
+            <div class="btn-wrapper">
+              <button class="btn btn-custom btn-danger" onclick="runBatch('DeployerServer')">Deployer Server</button>
+			</div>
+		  <div class="btn-wrapper">
+              <button class="btn btn-custom btn-danger" onclick="runBatch('RestoreServer')">Restore Server</button>
+			</div>			
+			<div class="btn-wrapper">  
+			  <button class="btn btn-custom btn-danger" onclick="runBatch('batfile','file:///C:/Users/sakib.ahmad/OneDrive/Office%20Docs/My%20Projects/HTML%20Flask%20Projects/QuickLinks/QuickLinks_Index.html', 'redirect')">Links Portal</button>
+            </div>
+			<div class="btn-wrapper">
+              <button class="btn btn-custom btn-danger" onclick="runBatch('batfile','file:///C:/Users/sakib.ahmad/OneDrive/Office%20Docs/My%20Projects/HTML%20Flask%20Projects/WorkFlows/WorkFlows_Index.html', 'redirect')">WorkFlows Portal</button>
+            </div>
+          </div>
+        </div>
+        <!-- Inner Box 2 -->
+        <div class="inner-box">
+          <div class="inner-box-header">Services</div>
+          <div class="d-flex flex-row flex-wrap justify-content-center">
+            <div class="btn-wrapper">
+             <button class="btn btn-custom btn-danger" onclick="startService('DbbScaleService')">Start ScaleService</button>
+            </div> 
+			<div class="btn-wrapper">
+              <button class="btn btn-custom btn-danger" onclick="runBatch('batfile','file:///C:/Users/sakib.ahmad/OneDrive/Office%20Docs/My%20Projects/AMEX_Label_Restore/Index.html', 'redirect')">Restore/Change Label</button>
+            </div>
+			<div class="btn-wrapper">
+              <button class="btn btn-custom btn-danger" onclick="runBatch('batfile','file:///C:/Users/sakib.ahmad/OneDrive/Office%20Docs/My%20Projects/Automate%20Desktop%20Apps/Report%20Delpoyer/Input.html', 'redirect')">Deploy Report</button>
+            </div>			
+			<div class="btn-wrapper">
+              <button class="btn btn-custom btn-danger" onclick="runBatch('Kill')">Kill Env</button>
+			</div>			
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- External JavaScript -->
+  <script src="Main_script.js"></script>
+</body>
+</html>
