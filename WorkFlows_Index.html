@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Workflow Runner</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Workflows_styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Dashboard Title -->
+    <h1 class="dashboard-title">Workflow Runner Dashboard</h1>
+    
+    <!-- CoreIssue Card -->
+    <div class="card">
+      <div class="card-header bg-primary text-white">CoreIssue</div>
+      <div class="card-body">
+        <!-- Buttons arranged in a row, wrapped in btn-wrapper -->
+        <div class="d-flex flex-row flex-wrap justify-content-center">
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('CI_AppServer')">App Server</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('CI_TnpNad')">TNP</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('AuthMSMQ')">AuthMSMQ</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('CIOutGoingEmbossing')">Embossing</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('CreateCHJobWF')">CreateCHJob</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('ProductTransfer')">Product Transfer</button>
+          </div>
+		  <div class="btn-wrapper">
+            <button class="btn btn-custom btn-success" onclick="runBatch('Tview')">Tview</button>
+          </div>		  
+        </div>
+      </div>
+    </div>
+    
+    <!-- CoreCollect Card -->
+    <div class="card">
+      <div class="card-header bg-warning text-dark">CoreCollect</div>
+      <div class="card-body">
+        <div class="d-flex flex-row flex-wrap justify-content-center">
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-warning" onclick="runBatch('CC_Appserver')">App Server</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-warning" onclick="runBatch('CreateCase')">CreateCase</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CoreAuth Card -->
+    <div class="card">
+      <div class="card-header bg-danger text-white">CoreAuth</div>
+      <div class="card-body">
+        <div class="d-flex flex-row flex-wrap justify-content-center">
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-danger" onclick="runBatch('CoreAuthAppserver')">App Server</button>
+          </div>
+          <div class="btn-wrapper">
+            <button class="btn btn-custom btn-danger" onclick="runBatch('Core_Auth_Aging_Workflow')">Auth Aging</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="Workflows_script.js"></script>
+</body>
+</html>

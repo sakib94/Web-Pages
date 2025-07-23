@@ -1,0 +1,231 @@
+/* Body Styling: Sets up the page with a moving gradient background */
+body {
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 20px;
+  background-image: linear-gradient(to right, #054f7d, #00a7cf, #efe348, #861a54, #054f7d);
+  background-size: 600%; /* Increased for wider gradient sweep */
+  background-position: 0 0;
+  box-shadow: inset 0 0 5em rgba(0,0,0,.5); /* Added shadow effect */
+  animation: gradientBG 20s infinite; /* New animation */
+    }
+
+@keyframes gradientBG {
+  0% { background-position: 0 0; }
+  25% { background-position: 50% 0; }
+  50% { background-position: 90% 0; }
+  60% { background-position: 60%; }
+  75% { background-position: 40%; }
+  100% { background-position: 0 0; }
+    }
+
+/* Container: Limits how wide the content can get */
+.container {
+  max-width: 1200px;
+}
+
+/* Dashboard Title: Reduced size and interactive styling */
+.dashboard-title {
+  font-size: 2.5em;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  background: linear-gradient(to bottom, #3333ff 0%, #ff99cc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+  animation: pulse 2s infinite ease-in-out, fadeIn 1s ease-in;
+  transition: transform 0.3s ease;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-title:hover {
+  transform: scale(1.1) rotate(2deg);
+  text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Card Styling: Each card is full-width (stacked vertically) */
+.card {
+  border: 2px solid #00001a;
+  border-radius: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #666699 0%, #ff99cc 100%);
+  margin-bottom: 30px;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  padding: 18px;
+  font-size: 1.2em;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.card-header::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
+  transition: all 0.5s;
+}
+
+.card:hover .card-header::after {
+  left: 150%;
+}
+
+/* Button Styling: Buttons inside each card in a row */
+.btn-custom {
+  width: auto;
+  margin: 10px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.btn-custom::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-custom:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-custom:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Gradient Animated Borders for Buttons using a wrapper */
+.btn-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 1px; /* Border thickness */
+  border-radius: 30px; /* Matches button's border-radius */
+}
+
+.btn-wrapper::before,
+.btn-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  right: 7px;
+  bottom: 7px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+  background-size: 250%;
+  animation: borderAnim 7.5s linear infinite;
+  z-index: -1;
+}
+
+.btn-wrapper::after {
+  filter: blur(10px);
+}
+
+@keyframes borderAnim {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 300% 0%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* Button Colors */
+.btn-success { background: linear-gradient(0deg, #000, #262626); }
+.btn-success:hover { background: #FF3366; }
+
+.btn-warning { background: #ff9100; }
+.btn-warning:hover { background: #e68a00; }
+
+.btn-danger { background: #FF3366; }
+.btn-danger:hover { background: linear-gradient(0deg, #000, #262626); }
+
+/* Alert Styling */
+.alert {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  min-width: 500px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  animation: bounceIn 0.6s ease-out;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border-color: #28a745;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  border-color: #dc3545;
+}
+
+@keyframes bounceIn {
+  0% { transform: translateX(-50%) scale(0.7); opacity: 0; }
+  60% { transform: translateX(-50%) scale(1.05); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+.alert.fade {
+  opacity: 1;
+}
+.alert.fade:not(.show) {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.9);
+}
+
+.alert .close {
+  font-size: 1.5em;
+  color: #333;
+  text-shadow: none;
+  transition: transform 0.2s ease;
+}
+
+.alert .close:hover {
+  transform: rotate(90deg);
+  color: #000;
+}
