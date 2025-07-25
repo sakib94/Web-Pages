@@ -6,23 +6,27 @@ import os
 app = Flask(__name__)
 CORS(app)  # Enable Cross-Origin Resource Sharing (CORS) to allow requests from different origins
 
+# Define common path variables
+projectPath = r"C:\Users\sakib.ahmad\OneDrive\Office Docs\My Projects"
+Caller = r"A:\RunSetup\BatchCaller"
+
 # Mapping dictionary: Maps job names to their corresponding file paths.
 # The file paths include both batch files (.bat) and Python files (.py).
 JOB_FILES = {
-    "CI_AppServer": r"A:\RunSetup\BatchCaller\CI_AppServer.bat",
-    "CC_Appserver": r"A:\RunSetup\BatchCaller\CC_Appserver.bat",
-    "CI_TnpNad": r"A:\RunSetup\BatchCaller\CI_TnpNad.bat",
-    "AuthMSMQ": r"A:\RunSetup\BatchCaller\AuthMSMQ.bat",
-    "CIOutGoingEmbossing": r"A:\RunSetup\BatchCaller\CIOutGoingEmbossing.bat",
-    "Core Auth Aging Workflow": r"A:\RunSetup\BatchCaller\Core Auth Aging Workflow.bat",
-    "CoreAuthAppserver": r"A:\RunSetup\BatchCaller\CoreAuthAppserver.bat",
-    "CreateCase": r"A:\RunSetup\BatchCaller\CreateCase.bat",
-    "CreateCHJobWF": r"A:\RunSetup\BatchCaller\CreateCHJobWF.bat",
-    "ProductTransfer": r"A:\RunSetup\BatchCaller\ProductTransfer.bat",
-	"DeployerServer": r"C:\Users\sakib.ahmad\OneDrive\Office Docs\My Projects\Automate Desktop Apps\Report Delpoyer\Run_Server.bat", 
-    "RestoreServer": r"C:\Users\sakib.ahmad\OneDrive\Office Docs\My Projects\AMEX_Label_Restore\Run_Server.bat", 
-    "Kill": r"C:\Users\sakib.ahmad\OneDrive\Office Docs\My Projects\Batch Scripts\Terminate.bat",
-    "Tview": r"C:\Users\sakib.ahmad\\OneDrive\Office Docs\My Projects\HTML Flask Projects\WorkFlows\Tview.bat"	
+    "CI_AppServer": f"{Caller}\\CI_AppServer.bat",
+    "CC_Appserver": f"{Caller}\\CC_Appserver.bat",
+    "CI_TnpNad": f"{Caller}\\CI_TnpNad.bat",
+    "AuthMSMQ": f"{Caller}\\AuthMSMQ.bat",
+    "CIOutGoingEmbossing": f"{Caller}\\CIOutGoingEmbossing.bat",
+    "Core Auth Aging Workflow": f"{Caller}\\Core Auth Aging Workflow.bat",
+    "CoreAuthAppserver": f"{Caller}\\CoreAuthAppserver.bat",
+    "CreateCase": f"{Caller}\\CreateCase.bat",
+    "CreateCHJobWF": f"{Caller}\\CreateCHJobWF.bat",
+    "ProductTransfer": f"{Caller}\\ProductTransfer.bat",
+    "DeployerServer": f"{projectPath}\\Report Delpoyer\\Run_Server.bat", 
+    "RestoreServer": f"{projectPath}\\AMEX_Label_Restore\\Run_Server.bat", 
+    "Kill": f"{projectPath}\\Batch Scripts\\Terminate.bat",
+    "Tview": f"{projectPath}\\HTML Flask Projects\\WorkFlows\\Tview.bat"	
 }
 
 # ✅ Endpoint to Start batch and py
@@ -81,5 +85,5 @@ def start_service():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-# Start the Flask application on port 5010
+    # Start the Flask application on port 5010
     app.run(port=5010)
