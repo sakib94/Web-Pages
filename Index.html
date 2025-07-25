@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Label Change</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Body Styling: Professional neutral background */
+    body {
+      font-family: 'Lato', 'Arial', sans-serif;
+      background: #E8E8E8; /* Light neutral gray */
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    /* Container: Matches card styling */
+    .container {
+      background: #e6ffff; /* Light cyan */
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #d1d5db; /* Light gray border */
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* Dashboard Title: Professional typography */
+    h2 {
+      text-align: center;
+      color: #1a3c34; /* Dark teal */
+      margin-bottom: 25px;
+      font-size: 2em;
+      font-weight: 600;
+    }
+
+    /* Form Group: Consistent with label styling */
+    .form-group label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #1a3c34; /* Dark teal */
+      font-size: 15px;
+    }
+
+    /* Form Inputs and Selects: Matches inner-box styling */
+    .form-control {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #d1d5db; /* Light gray border */
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #d9f2e6; /* Light green */
+    }
+
+    .form-control:focus {
+      border-color: #cce0ff; /* Light blue to match card header */
+      outline: none;
+      box-shadow: none; /* Override Bootstrap's default focus shadow */
+    }
+
+    /* Button Styling: Custom to match professional theme */
+    .btn-custom {
+      width: 100%;
+      padding: 12px;
+      background: #2e7d32; /* Professional green */
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 20px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+    }
+
+    .btn-custom:hover {
+      background: #27632a; /* Darker green */
+      filter: brightness(90%); /* Subtle hover effect */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Better hover feedback */
+    }
+
+    /* Override Bootstrap's btn-primary for consistency */
+    .btn-primary {
+      background: #2e7d32; /* Professional green */
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #27632a; /* Darker green */
+      filter: brightness(90%);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Result Div: Consistent styling */
+    #result {
+      margin-top: 20px;
+      color: #1a3c34; /* Dark teal */
+      font-size: 14px;
+    }
+
+    /* Modal Styling: Professional and responsive (for potential future use) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background: #e6ffff; /* Light cyan to match container */
+      margin: 15% auto;
+      padding: 25px 30px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db; /* Light gray border */
+      min-width: 300px; /* Responsive */
+      max-width: 90%; /* Prevent overflow */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .modal-content strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 12px;
+      color: #1a3c34; /* Dark teal */
+    }
+
+    .modal-content p {
+      font-size: 14px;
+      color: #1a3c34; /* Dark teal */
+    }
+
+    .close {
+      color: #333;
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    #errorModal .modal-content {
+      background: #e5e7eb; /* Slightly darker gray for error */
+      border-color: #6b7280; /* Professional gray */
+    }
+
+    #errorModal strong {
+      color: #6b7280; /* Professional gray */
+    }
+
+    #successModal .modal-content {
+      background: #e8f5e9; /* Light green for success */
+      border-color: #2e7d32; /* Professional green */
+    }
+
+    #successModal strong {
+      color: #2e7d32; /* Professional green */
+    }
+
+    .modal-content button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: #2e7d32; /* Professional green */
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background: #27632a; /* Darker green */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Restore/Change AMEX Label</h2>
+    <form id="batchForm">
+      <!-- Label Option Dropdown -->
+      <div class="form-group">
+        <label for="labelOptionSelect">Label Option:</label>
+        <select class="form-control" id="labelOptionSelect" required>
+          <option value="">---Select---</option>
+          <option value="Restore">Restore DB Only</option>
+          <option value="Change">Change Label</option>
+        </select>
+      </div>
+      <!-- Version Input -->
+      <div class="form-group">
+        <label for="versionInput">Version:</label>
+        <input type="text" class="form-control" id="versionInput" placeholder="Enter version" required>
+      </div>
+      <!-- Date Input -->
+      <div class="form-group">
+        <label for="dateInput">Tview Date:</label>
+        <input type="text" class="form-control" id="dateInput" placeholder="e.g., 08/01/2021" required>
+      </div>    
+      <!-- Database Dropdown -->
+      <div class="form-group">
+        <label for="dbSelect">Select Database:</label>
+        <select class="form-control" id="dbSelect" required>
+          <option value="">---Select---</option>
+          <option value="Shrunk">Shrunk Database</option>
+          <option value="Master">Master Database</option>
+          <option value="Users">Users Database</option>
+          <option value="Random">Random Database</option>
+        </select>
+      </div>
+      <!-- New DB Location Input (Hidden by default) -->
+      <div class="form-group db-location-input" id="dbLocationInputDiv">
+        <label for="dbLocationInput">DB Location:</label>
+        <input type="text" class="form-control" id="dbLocationInput" placeholder="Enter DB location">
+      </div>
+      <button type="submit" class="btn btn-custom btn-primary">Submit</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  
+  <!-- jQuery and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+</body>
+</html>

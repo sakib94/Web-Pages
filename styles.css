@@ -1,0 +1,150 @@
+/* Import Google Fonts for a modern touch */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* Gradient background with subtle animation */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3, #f6e6b4, #fad0c4);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Container styling with subtle hover animation */
+.container {
+  max-width: 350px;
+  background: #d6d6a3;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Form heading with fade-in animation, moved up */
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: -20px;
+  color: #0056b3;
+  font-weight: 800;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Form group with subtle animation */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Label styling */
+label {
+  font-weight: 800;
+  color: #500000;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Form input fields styling with focus animation */
+.form-control {
+  max-width: 300px;
+  border-radius: 20px;
+  border: 2px solid #ced4da;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+  transform: scale(1.02);
+}
+
+/* Dropdown styling */
+select.form-control {
+  background: #f9f9f9 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>') no-repeat right 10px center;
+  background-size: 8px;
+  padding-right: 25px;
+}
+
+/* Button styling with gradient and animation */
+.btn-primary {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #0056b3, #0099ff);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+/* Result message styling with fade-in */
+#result {
+  margin-top: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #28a745;
+  animation: fadeInResult 0.5s ease-in;
+}
+
+@keyframes fadeInResult {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Error styling for result */
+#result.error {
+  color: #dc3545;
+}
+
+/* Style for the new input (DB location) */
+.db-location-input {
+  display: none; /* Hidden initially */
+}
