@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Run Deployment Automation</title>
+  <style>
+    /* Body Styling: Professional neutral background */
+    body {
+      font-family: 'Lato', 'Arial', sans-serif;
+      background: #E8E8E8; /* Light neutral gray */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Container: Matches card styling */
+    .container {
+      background: #e6ffff; /* Light cyan */
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border: 1px solid #d1d5db; /* Light gray border */
+      width: 100%;
+      max-width: 520px;
+    }
+
+    /* Dashboard Title: Professional typography */
+    h2 {
+      text-align: center;
+      color: #1a3c34; /* Dark teal */
+      margin-bottom: 25px;
+      font-size: 2em;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #1a3c34; /* Dark teal */
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db; /* Light gray border */
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #d9f2e6; /* Light green to match inner-box */
+    }
+
+    input:focus, select:focus {
+      border-color: #cce0ff; /* Light blue to match card header */
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2e7d32; /* Professional green */
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      filter: brightness(90%); /* Subtle hover effect */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Better hover feedback */
+      background: #27632a; /* Darker green */
+    }
+
+    /* Shared modal styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background: #e6ffff; /* Light cyan to match container */
+      margin: 15% auto;
+      padding: 25px 30px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db; /* Light gray border */
+      min-width: 300px; /* Responsive */
+      max-width: 90%; /* Prevent overflow */
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    .modal-content strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 12px;
+      color: #1a3c34; /* Dark teal */
+    }
+
+    .modal-content p {
+      font-size: 14px;
+      color: #1a3c34; /* Dark teal */
+    }
+
+    .close {
+      color: #333;
+      float: right;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    #errorModal .modal-content {
+      background: #e5e7eb; /* Slightly darker gray for error */
+      border-color: #6b7280; /* Professional gray */
+    }
+
+    #errorModal strong {
+      color: #6b7280; /* Professional gray */
+    }
+
+    #successModal .modal-content {
+      background: #e8f5e9; /* Light green for success */
+      border-color: #2e7d32; /* Professional green */
+    }
+
+    #successModal strong {
+      color: #2e7d32; /* Professional green */
+    }
+
+    .modal-content button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: #2e7d32; /* Professional green */
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background: #27632a; /* Darker green */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Run Deployment Automation</h2>
+    <form id="form">
+      <label for="password">Machine Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="ciPackage">CoreIssue Package Path:</label>
+      <input type="text" id="ciPackage" name="ciPackage" placeholder="Eg: E:\Report Package Deployer\CoreIssue">
+
+      <label for="ccPackage">CoreCollect Package Path:</label>
+      <input type="text" id="ccPackage" name="ccPackage" placeholder="Eg: E:\Report Package Deployer\CoreCollect">
+
+      <label for="deploymentType">Deployment Type:</label>
+      <select id="deploymentType" name="deploymentType" required>
+        <option value="">-- Deployment Type --</option>
+        <option value="CI">CoreIssue (CI)</option>
+        <option value="CC">CoreCollect (CC)</option>
+        <option value="BOTH">Both</option>
+      </select>
+
+      <button type="button" onclick="submitForm()">Run Automation</button>
+    </form>
+  </div>
+
+  <!-- Error Modal -->
+  <div id="errorModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('errorModal')">×</span>
+      <strong id="modalErrorMessage">Error!</strong>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('successModal')">×</span>
+      <strong>✅ Deployment Successful</strong>
+      <p id="successMessage">Reports deployed successfully!</p>
+      <button onclick="closeModal('successModal')">OK</button>
+    </div>
+  </div>
+
+  <script>
+    function submitForm() {
+      const form = document.getElementById('form');
+      const password = form.password.value.trim();
+      const ciPackage = form.ciPackage.value.trim();
+      const ccPackage = form.ccPackage.value.trim();
+      const deploymentType = form.deploymentType.value;
+
+      if (!password) return showError("Password is required.");
+
+      if (deploymentType === "CI" && !ciPackage) {
+        return showError("CoreIssue Package Path is required for CI deployment.");
+      }
+
+      if (deploymentType === "CC" && !ccPackage) {
+        return showError("CoreCollect Package Path is required for CC deployment.");
+      }
+
+      if (deploymentType === "BOTH" && (!ciPackage || !ccPackage)) {
+        return showError("Both CoreIssue and CoreCollect Package Paths are required for BOTH deployment.");
+      }
+
+      const formData = { password, ciPackage, ccPackage, deploymentType };
+
+      fetch('http://localhost:5020/run_automation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message && data.message.toLowerCase().includes("success")) {
+          document.getElementById('successMessage').textContent = data.message;
+          showModal('successModal');
+        } else {
+          showError(data.message || "Deployment completed with unknown result.");
+        }
+      })
+      .catch(error => {
+        showError("❌ Could not reach the server. Please ensure it's running.");
+      });
+    }
+
+    function showError(message) {
+      document.getElementById('modalErrorMessage').textContent = message;
+      showModal('errorModal');
+    }
+
+    function showModal(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modals = ['errorModal', 'successModal'];
+      modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (event.target === modal) modal.style.display = "none";
+      });
+    };
+  </script>
+</body>
+</html>
